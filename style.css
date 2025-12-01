@@ -1,0 +1,729 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f0f2f5; */
+    color: #333;
+	background-image: url(imggame/8GNb1CApTf9wzs4Z7NUzuAAG0nK0ja9JdWc-ZbXC0y4.jpeg);
+	background-size: cover;
+}
+/* ================================================================= */
+/* --- BỔ SUNG: LOGIC ẢNH DLS25 NẰM DỌC HAI BÊN VIỀN CỐ ĐỊNH --- */
+/* ================================================================= */
+
+/* Tạo phần tử giả ::before cho bên trái */
+body::before {
+    content: ''; /* Bắt buộc phải có content cho pseudo-element */
+    position: fixed; /* Cố định vị trí trên màn hình */
+    top: 55%; /* Bắt đầu từ giữa chiều cao màn hình */
+    left: -327px; /* Điều chỉnh vị trí ra ngoài lề trái để căn chỉnh sau khi xoay */
+    transform: translateY(-50%) rotate(-90deg); /* Xoay ngược 90 độ và căn giữa dọc */
+    transform-origin: center center; /* Đảm bảo xoay từ tâm */
+    
+    width:800px; /* Chiều rộng ảnh gốc DLS25 của bạn */
+    height: 150px; /* Chiều cao ảnh gốc DLS25 của bạn (trước khi xoay) */
+    
+    background-image: url('imggame/dls25.png'); /* Đường dẫn đến ảnh DLS25 */
+    background-size: contain; /* Đảm bảo ảnh nằm gọn trong kích thước đã đặt */
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    z-index: 999; /* Đảm bảo ảnh nằm trên các nội dung khác */
+    pointer-events: none; /* Quan trọng: Cho phép click xuyên qua ảnh này */
+    opacity: 0.8; /* Làm mờ một chút để không gây phân tâm (tùy chọn) */
+}
+
+/* Tạo phần tử giả ::after cho bên phải (tương tự) */
+body::after {
+    content: '';
+    position: fixed;
+    top: 55%;
+    right: -327px; /*Điều chỉnh vị trí ra ngoài lề phải*/
+    transform: translateY(-50%) rotate(90deg); /* Xoay thuận 90 độ và căn giữa dọc */
+    transform-origin: center center;
+    
+    width: 800px; /* Chiều rộng ảnh gốc DLS25 của bạn */
+    height: 150px; /* Chiều cao ảnh gốc DLS25 của bạn (trước khi xoay) */
+    
+    background-image: url('imggame/dls25.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.8; /* Làm mờ một chút (tùy chọn) */
+}
+
+.introduce{
+	position: relative;
+	display: flex;
+	background-image: url(imggame/background1.jpg);
+	border-radius: 12px;
+	justify-content: center;
+	max-width: 1200px;
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 17px;
+	background-size: cover;
+}
+
+.introduce-detail{
+	position: relative;
+	display: flex;
+	background-color: #008cff;
+	border-radius: 12px;
+	justify-content: center;
+	max-width: 1200px;
+	width: 90%;
+	margin: 0 auto;
+	background-image: url(imggame/background1.jpg);
+	background-size: cover;
+	margin-bottom: 10px;
+}
+
+.section-title {
+	text-align: center;
+	margin: 30px 0 30px;
+	color: #fff;
+	font-size: 2em;
+	font-weight: 700;
+}
+
+/* ========================= HEADER STYLING ========================= */
+.main-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 50px;
+	background-color: #0d47a1; /* Xanh đậm */
+	color: white; /* Có thể bỏ dòng này nếu không còn text nào màu trắng */
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.site-logo {
+	max-height: 50px; /* Chiều cao tối đa cho logo, bạn có thể điều chỉnh */
+	width: auto; /* Giữ tỷ lệ khung hình */
+	display: block; /* Đảm bảo không có khoảng trắng thừa dưới ảnh */
+}
+
+.logo-area a {
+	text-decoration: none; /* Bỏ gạch chân cho link logo */
+}
+
+/* Các style khác của header giữ nguyên */
+
+.search-and-action input,
+.search-and-action button {
+	padding: 10px 15px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.search-button,
+.login-button {
+	background-color: #ffb300; /* Màu nổi bật */
+	color: #333;
+	font-weight: bold;
+	cursor: pointer;
+	border: none;
+}
+.login-button:hover {
+	background-color: #ffc107;
+}
+
+/* ========================= IMAGE SLIDER STYLING ========================= */
+.hero-slider {
+	text-align: center;
+	padding: 20px 0;
+}
+
+.slider-container {
+	width: 90%; /* Chiếm 90% chiều rộng màn hình */
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.slide {
+	width: 100%;
+	display: none; /* Ẩn mặc định */
+	height: auto;
+	object-fit: cover;
+}
+
+.slide.active {
+	display: block; /* Chỉ hiển thị ảnh active */
+	animation: fadeIn 1s; /* Thêm hiệu ứng chuyển động */
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+.prev-btn, .next-btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	border: none;
+	padding: 15px 18px;
+	font-size: 20px;
+	cursor: pointer;
+	z-index: 10;
+	border-radius: 50%;
+	transition: background-color 0.3s;
+}
+.prev-btn:hover, .next-btn:hover { background-color: rgba(0, 0, 0, 0.8); }
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.slider-dots { margin-top: 15px; }
+.dot {
+	height: 12px;
+	width: 12px;
+	margin: 0 5px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+.dot.active { background-color: #0d47a1; }
+
+
+/* ========================= PRODUCT GRID STYLING ========================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 cột trên desktop */
+    gap: 30px;
+    padding: 20px 50px; /* Khôi phục padding ban đầu */
+	max-width: 1200px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.product-card {
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	transition: transform 0.3s;
+	text-decoration: none;
+}
+.product-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.product-card img {
+	width: 100%;
+	height: 250px;
+	object-fit: cover;
+}
+
+.product-info {
+	padding: 15px;
+	text-align: center;
+}
+
+.price {
+	font-size: 1.5em;
+	color: #e65100; /* Màu cam nổi bật cho giá */
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.buy-button {
+	background-color: #0d47a1;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+.buy-button:hover {
+	background-color: #1565c0;
+}
+
+.buy-ID{
+	background-color: #a1610d;
+	color: white;
+	border: #ffb300;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+.buy-ID:hover {
+	background-color: #c07015;
+}
+
+/* ========================= PAYMENT & CONTACT STYLING ========================= */
+.payment-methods {
+	padding: 40px 50px;
+	background-color: #e3f2fd; /* Nền xanh nhạt */
+	text-align: center;
+}
+
+.payment-list {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+	margin-top: 20px;
+	flex-wrap: wrap;
+}
+
+.payment-item img {
+	width: 50px;
+	height: 50px;
+	object-fit: contain;
+	border-radius: 5px;
+}
+
+.payment-item p {
+	margin-top: 10px;
+	font-size: 0.9em;
+}
+
+.payment-cost{
+	display: flex;
+	color: #000000;
+	justify-content: center;
+	font-size: larger;
+}
+
+/* Thẻ liên hệ */
+.contact-cards {
+	display: flex;
+	justify-content: center;
+	padding: 30px 50px;
+	gap: 50px;
+}
+
+.contact-link {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	padding: 15px 30px;
+	border-radius: 8px;
+	color: white;
+	font-weight: bold;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	transition: transform 0.3s;
+}
+.contact-link:hover {
+	transform: scale(1.05);
+}
+
+.contact-link i {
+	margin-right: 15px;
+}
+
+.facebook-link { background-color: #3b5998; }
+.zalo-link { background-color: #008cff; }
+
+/* ========================= FOOTER STYLING ========================= */
+.main-footer {
+	background-color: #263238; /* Màu tối */
+	color: white;
+	padding: 30px 50px 10px;
+}
+
+.footer-content {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	border-bottom: 1px solid #455a64;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+}
+
+.footer-section {
+	flex-basis: 25%;
+	min-width: 200px;
+	margin-bottom: 20px;
+}
+
+.footer-section h4 {
+	border-left: 3px solid #ffb300;
+	padding-left: 10px;
+	margin-bottom: 15px;
+	font-size: 1.2em;
+}
+
+.footer-section.statistics p {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.support-logo img {
+	width: 80px;
+	height: auto;
+	margin-top: 10px;
+}
+
+.footer-bottom {
+	text-align: center;
+	font-size: 0.8em;
+	padding-top: 10px;
+}
+
+/* ========================= ACCOUNT CODE DISPLAY ========================= */
+.account-code-display {
+	text-align: right;
+	padding: 10px 50px;
+	background-color: #e0f2f1; /* Màu nền nhẹ để nổi bật */
+	color: #004d40;
+	font-size: 1.2em;
+	font-weight: bold;
+	border-bottom: 2px solid #b2dfdb;
+}
+
+/* ========================= CẬP NHẬT: PRODUCT DETAIL LAYOUT ========================= */
+
+.product-detail-container {
+	display: flex;
+	justify-content: space-between;
+	padding: 40px 50px;
+	gap: 50px;
+	background-color: white;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+	margin: 0 auto;
+	border-radius: 10px;
+	max-width: 1200px;
+	width: 74%;
+}
+
+.image-gallery {
+	display: flex;
+	gap: 15px; 
+	flex: 1; 
+	max-width: 600px;
+	margin-top: 28px; /* Vẫn giữ cho khu vực ảnh tổng thể không quá rộng, phù hợp với ảnh dọc */
+}
+
+.image-stack-vertical {
+	display: flex;
+	flex-direction: column; 
+	gap: 30px; /* Khoảng cách giữa ảnh và nút mua */
+	align-items: center; 
+}
+
+/* Khu vực chứa các ảnh chi tiết (thumbnail-stack) */
+.thumbnail-stack {
+	width: 100%;
+	display: flex;
+	flex-direction: column; /* Đảm bảo các ảnh được xếp dọc */
+	gap: 15px; /* Khoảng cách giữa các ảnh với nhau */
+	align-items: center; 
+}
+
+/* Định nghĩa style cho TẤT CẢ các ảnh trong stack */
+.thumbnail-stack img {
+	width: 100%;
+	max-width: 800px; /* Chiếm tối đa 800px, nhưng thích ứng với 100% cột */
+	height: auto;
+	object-fit: cover;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* --- Info and Purchase (Thông tin - Bên phải) --- */
+.info-and-purchase {
+	flex: 0.4;
+	padding-left: 20px;
+}
+
+.acc-specs {
+	list-style: none;
+	padding: 0;
+	margin-top: 20px;
+}
+
+.acc-specs li {
+	padding: 10px 0;
+	border-bottom: 1px dashed #eee;
+	font-size: 1.1em;
+}
+
+.acc-specs li i {
+	color: #ffb300;
+	margin-right: 10px;
+}
+
+.final-price {
+	font-size: 1.8em;
+	color: #e65100;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.purchase-button {
+	width: 100%;
+	background-color: #e65100; /* Màu cam để nổi bật nút mua */
+	color: white;
+	border: none;
+	padding: 15px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: 30px;
+	transition: background-color 0.3s;
+}
+.purchase-button:hover {
+	background-color: #ff6f00;
+}
+
+/* --- QR Code Section --- */
+.qr-payment-section {
+	text-align: center;
+	margin-top: 40px;
+	padding: 30px;
+	border: 2px solid #e0e0e0;
+	border-radius: 8px;
+}
+
+.qr-payment-section h4 {
+	color: #0d47a1;
+	margin-bottom: 15px;
+}
+
+.qr-code {
+	max-width: 80%;
+	height: auto;
+	border: 5px solid white;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.qr-note {
+	font-style: italic;
+	color: #777;
+	margin-top: 10px;
+}
+
+/* --- Related Products (Sản phẩm liên quan) --- */
+.related-products {
+	padding: 20px 50px 50px;
+}
+
+.related-grid {
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cột nhỏ hơn cho phần liên quan */
+}
+
+.contact-cards-detail {
+	/* Điều chỉnh bố cục để hiển thị dưới QR */
+	display: flex;
+	flex-direction: column; 
+	gap: 15px;
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+}
+.contact-cards-detail .contact-link {
+	/* Đảm bảo chúng chiếm toàn bộ chiều rộng */
+	width: 86%;
+	justify-content: center;
+}
+
+/* --- Hiệu ứng "lên xuống" tự động cho các ảnh chi tiết --- */
+@keyframes floatAnimation {
+	0% { transform: translateY(0px); }
+	50% { transform: translateY(-8px); } /* Ảnh sẽ nhích lên 8px */
+	100% { transform: translateY(0px); }
+}
+
+.product-image-stack { /* Đây là class của các ảnh trong thumbnail-stack */
+	/* Giữ nguyên các style kích thước, border, shadow */
+	animation: floatAnimation 3s ease-in-out infinite; /* Áp dụng animation */
+}
+
+/* Có thể tùy chỉnh delay cho từng ảnh nếu muốn chúng di chuyển lệch pha */
+/* Ví dụ: */
+.thumbnail-stack img:nth-child(2) { animation-delay: 0.5s; }
+.thumbnail-stack img:nth-child(3) { animation-delay: 1s; }
+.thumbnail-stack img:nth-child(4) { animation-delay: 1.5s; }
+
+/* ========================= CSS cho slider ngang (Tài khoản khác hiện có) ========================= */
+.related-products .product-grid {
+	display: flex; /* Thay vì grid, dùng flex để tạo slider ngang */
+	overflow-x: hidden; /* Ẩn các sản phẩm vượt ra ngoài khung nhìn */
+	scroll-behavior: smooth; /* Cuộn mượt mà */
+	padding: 20px 0;
+	position: relative; /* Dành cho các nút điều hướng */
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Tạo cảm giác khung slider */
+	border-radius: 10px;
+}
+
+/* Để các thẻ sản phẩm trong slider có chiều rộng cố định */
+.related-products .product-card {
+	flex: 0 0 280px; /* Không co giãn, chiếm 280px */
+	margin-right: 20px; /* Khoảng cách giữa các thẻ */
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+	transition: transform 0.3s ease;
+}
+
+.related-products .product-card:hover {
+	transform: translateY(-5px);
+}
+
+.related-products .product-card img {
+	height: 180px; /* Chiều cao cố định cho ảnh trong slider */
+	object-fit: cover;
+}
+
+/* Nút điều hướng cho slider ngang (Điều chỉnh vị trí) */
+.related-products {
+    position: relative; /* Thêm quy tắc này ở đâu đó để làm cha cho nút */
+    padding: 20px 0; 
+    margin: 40px auto;
+    max-width: 1400px;
+}
+
+.related-products .slider-nav-btn {
+    position: absolute; 
+    top: 55%; /* Định vị 55% để ở giữa thanh cuộn */
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.5em;
+    z-index: 10; /* Tăng z-index để nút luôn nằm trên slider */
+    transition: background-color 0.3s;
+}
+
+.related-products .prev-related-btn {
+    left: 20px; /* Khoảng cách từ lề trái */
+}
+
+.related-products .next-related-btn {
+    right: 20px; /* Khoảng cách từ lề phải */
+}
+.related-products .slider-nav-btn:hover { background-color: rgba(0, 0, 0, 0.7); }
+
+/* ================================================================= */
+/* --- RESPONSIVE CSS: TABLET (max-width: 1024px) --- */
+/* ================================================================= */
+@media screen and (max-width: 1024px) {
+    /* HEADER */
+    .main-header {
+        padding: 15px 20px;
+    }
+    
+    /* TRANG CHỦ: Lưới sản phẩm */
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Giảm kích thước cột */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* TRANG CHI TIẾT: Ẩn ảnh DLS25 xoay (để tiết kiệm không gian) */
+    body::before,
+    body::after {
+        display: none;
+    }
+
+    /* TRANG CHI TIẾT: Bố cục 2 cột chính */
+    .product-detail-container {
+        flex-direction: column; /* Chuyển sang bố cục dọc trên tablet/mobile */
+        gap: 30px;
+        padding: 20px;
+        width: 90%;
+        max-width: 100%;
+    }
+    
+    .image-gallery,
+    .info-and-purchase {
+        max-width: 100%; /* Cho phép chúng chiếm toàn bộ chiều rộng */
+        flex: none;
+        padding-left: 0;
+    }
+
+    /* QR Code và Liên hệ */
+    .qr-payment-section {
+        margin-top: 20px;
+    }
+}
+
+/* ================================================================= */
+/* --- RESPONSIVE CSS: MOBILE (max-width: 600px) --- */
+/* ================================================================= */
+@media screen and (max-width: 600px) {
+    /* HEADER: Sắp xếp dọc */
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .search-and-action {
+        width: 100%; /* Thanh tìm kiếm chiếm toàn bộ chiều rộng */
+        margin-top: 10px;
+        display: flex;
+    }
+    
+    .search-and-action input {
+        flex-grow: 1;
+        margin-left: 0;
+    }
+    .search-and-action button {
+        margin-left: 5px;
+        padding: 10px 15px;
+    }
+
+    /* TRANG CHỦ: Tiêu đề và Slider */
+    .section-title {
+        font-size: 1.5em;
+        margin: 20px 0;
+    }
+    .slider-container {
+        width: 100%;
+        border-radius: 0;
+    }
+    .prev-btn, .next-btn {
+        padding: 8px 10px;
+        font-size: 1em;
+        left: 5px;
+    }
+    .next-btn { right: 5px; }
+
+    /* TRANG CHỦ: Lưới sản phẩm (1 cột) */
+    .product-grid {
+        grid-template-columns: 1fr; /* Chỉ 1 cột duy nhất */
+        padding: 15px;
+        gap: 15px;
+    }
+
+    /* TRANG CHI TIẾT: Liên hệ và Thanh toán */
+    .contact-cards-detail .contact-link {
+        width: 100%; /* Chiếm toàn bộ chiều rộng cột */
+    }
+
+    /* FOOTER */
+    .footer-content {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .footer-section {
+        flex-basis: 100%;
+        min-width: unset;
+    }
+}
