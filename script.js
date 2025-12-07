@@ -204,7 +204,7 @@ function loadProductDetails() {
 	
 	// 3. Chèn Tiêu đề và Thông số chi tiết
 	document.querySelector('.section-title').innerHTML = `
-		⭐ CHI TIẾT TÀI KHOẢN - ${data.id} ⭐
+		CHI TIẾT TÀI KHOẢN - ${data.id}
 	`;
 	
 	const specsHTML = `
@@ -326,4 +326,5 @@ document.addEventListener('DOMContentLoaded', function() {
 		relatedSlider.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
 		relatedSlider.addEventListener('mouseleave', startAutoScroll);
 	}
+
 });
