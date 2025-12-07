@@ -809,7 +809,7 @@ body::after {
 
 	/* TRANG CHI TIẾT: Liên hệ và Thanh toán */
 	.contact-cards-detail .contact-link {
-		width: 86.2%;
+		width: 85.2%;
 	}
 
 	.info-and-purchase-introduce-title{
@@ -818,7 +818,7 @@ body::after {
 	}
 
 	.purchase-button{
-		width: 93%;
+		width: 92%;
 	}
 
 	/* FOOTER */
@@ -889,4 +889,5 @@ body::after {
 	.buying-main-step1 {
 		width: 90%;
 	}
+
 }
